@@ -15,7 +15,7 @@ import mutagen.easyid3
 
 
 ##########################################################
-MUSIC_FOLDER_PATH = "D:/Music"
+MUSIC_FOLDER_PATH = "/home/mohammad/Desktop/Music"
 ##########################################################
 
 
@@ -29,7 +29,11 @@ def dfsUpdate(path, artist, album):
 			dfsUpdate(new_path, artist, album)
 		elif a_file.lower().endswith(".mp3"):
 			print new_path
-			audio_file = mutagen.easyid3.EasyID3(new_path)
+			try:
+				audio_file = mutagen.easyid3.EasyID3(new_path)
+			except:
+				audio_file = mutagen.File(new_path, easy=True)
+				audio_file.add_tags()
 			audio_file["artist"] = artist.decode("utf-8")
 			audio_file["album"] = album.decode("utf-8")
 			# audio_file["title"] = ""
@@ -40,20 +44,9 @@ def dfsUpdate(path, artist, album):
 
 ##########################################################
 if __name__ == "__main__":
-	# artist_list = os.listdir(MUSIC_FOLDER_PATH)
-	# for artist in artist_list:
-	# 	artist_folder_path = os.path.join(MUSIC_FOLDER_PATH, artist)
-	# 	default_album = "Single"
-	# 	dfsUpdate(artist_folder_path, artist, default_album)
-	new_path, artist, album = sys.argv[1:]
-	try:
-		audio_file = mutagen.easyid3.EasyID3(new_path)
-	except mutagen.id3.ID3NoHeaderError:
-		audio_file = mutagen.File(new_path, easy=True)
-		audio_file.add_tags()
-	audio_file["artist"] = artist.decode("utf-8")
-	audio_file["album"] = album.decode("utf-8")
-	# audio_file["title"] = ""
-	# audio_file["date"] = 2000
-	audio_file.save()
+	artist_list = os.listdir(MUSIC_FOLDER_PATH)
+	for artist in artist_list:
+		artist_folder_path = os.path.join(MUSIC_FOLDER_PATH, artist)
+		default_album = "Single"
+		dfsUpdate(artist_folder_path, artist, default_album)
 ##########################################################
