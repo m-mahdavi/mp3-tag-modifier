@@ -36,8 +36,10 @@ def dfsUpdate(path, artist, album):
 				audio_file.add_tags()
 			audio_file["artist"] = artist.decode("utf-8")
 			audio_file["album"] = album.decode("utf-8")
-			# audio_file["title"] = ""
-			# audio_file["date"] = 2000
+			audio_file["title"] = a_file[:-4]
+			audio_file["albumartist"] = ""
+			audio_file["tracknumber"] = ""
+			audio_file["date"] = ""
 			audio_file.save()
 ##########################################################
 
