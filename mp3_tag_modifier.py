@@ -40,6 +40,7 @@ def dfsUpdate(path, artist, album):
             audio_file["album"] = album.decode("utf-8")
             audio_file["title"] = a_file[:-4]
             audio_file.save()
+            os.rename(new_path, new_path[:-3] + "mp3")
 ##########################################################
 
 
