@@ -13,7 +13,7 @@ import mutagen.easyid3
 
 
 ##########################################################
-MUSIC_FOLDER_PATH = "/mnt/e/Music"   # "/media/mohammad/08CC2DB1CC2D99C8/Music"   #"D:/Music"   # "/mnt/e/Music"
+MUSIC_FOLDER_PATH = "/mnt/c/Users/mmahdavi/Desktop/Me/Music"    # "/mnt/e/Music"   # "/media/mohammad/08CC2DB1CC2D99C8/Music"   #"D:/Music"   # "/mnt/e/Music"
 ##########################################################
 
 
@@ -31,7 +31,10 @@ def dfsUpdate(path, artist, album):
 			audio_file["artist"] = artist
 			audio_file["album"] = album
 			audio_file["title"] = ""
-			# audio_file["date"] = 2000
+			audio_file["genre"] = ""
+			audio_file["tracknumber"] = ""
+			audio_file["albumartist"] = ""
+			audio_file["date"] = ""
 			audio_file.save()
 ##########################################################
 
