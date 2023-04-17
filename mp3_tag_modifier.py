@@ -27,7 +27,11 @@ def dfsUpdate(path, artist, album):
 			dfsUpdate(new_path, artist, album)
 		elif a_file.lower().endswith(".mp3"):
 			print(new_path)
-			audio_file = mutagen.easyid3.EasyID3(new_path)
+			try:
+				audio_file = mutagen.easyid3.EasyID3(new_path)
+			except mutagen.id3.ID3NoHeaderError:
+				audio_file = mutagen.File(new_path, easy=True)
+				audio_file.add_tags()
 			audio_file["artist"] = artist
 			audio_file["album"] = album
 			audio_file["title"] = ""
